@@ -7,7 +7,7 @@ n.experts<-5
 n.params<-6
 n.alts<-7
 
-#Guam X/Amy
+#Guam X
 E1list<-list(idE1=as.data.frame(read_excel(here("data/Elicitation sheets/Amy Round 1.xlsx"), "Instructions")[15,-1])[1,],
              P1E1=as.data.frame(read_excel(here("data/Elicitation sheets/Amy Round 1.xlsx"), "Sali Adult Survival")[1:14,2:5]),
              P2E1=as.data.frame(read_excel(here("data/Elicitation sheets/Amy Round 2.xlsx"), "Sali Juvenile Survival")[,2:5]),
@@ -16,7 +16,7 @@ E1list<-list(idE1=as.data.frame(read_excel(here("data/Elicitation sheets/Amy Rou
              P5E1=as.data.frame(read_excel(here("data/Elicitation sheets/Amy Round 2.xlsx"), "Sali Nest Attempts")[,2:5]),
              P6E1=as.data.frame(read_excel(here("data/Elicitation sheets/Amy Round 1.xlsx"), "Sali Fledgings per Nest")[1:14,2:5]))
 
-#Expert 1/Eben
+#Expert 1
 E2list<-list(idE2=as.data.frame(read_excel(here("data/Elicitation sheets/Eben Round 1.xlsx"), "Instructions")[15,-1])[1,],
              P1E2=as.data.frame(read_excel(here("data/Elicitation sheets/Eben Round 2.xlsx"), "Sali Adult Survival")[,2:5]),
              P2E2=as.data.frame(read_excel(here("data/Elicitation sheets/Eben Round 2.xlsx"), "Sali Juvenile Survival")[,2:5]),
@@ -25,7 +25,7 @@ E2list<-list(idE2=as.data.frame(read_excel(here("data/Elicitation sheets/Eben Ro
              P5E2=as.data.frame(read_excel(here("data/Elicitation sheets/Eben Round 2.xlsx"), "Sali Nest Attempts")[,2:5]),
              P6E2=as.data.frame(read_excel(here("data/Elicitation sheets/Eben Round 2.xlsx"), "Sali Fledgings per Nest")[,2:5]))
 
-#aircon/ Martin
+#aircon
 E3list<-list(idE3=as.data.frame(read_excel(here("data/Elicitation sheets/Martin Round 1.xlsx"), "Instructions")[15,-1])[1,],
              P1E3=as.data.frame(read_excel(here("data/Elicitation sheets/Martin Round 2.xlsx"), "Sali Adult Survival")[,2:5]),
              P2E3=as.data.frame(read_excel(here("data/Elicitation sheets/Martin Round 2.xlsx"), "Sali Juvenile Survival")[,2:5]),
@@ -34,7 +34,7 @@ E3list<-list(idE3=as.data.frame(read_excel(here("data/Elicitation sheets/Martin 
              P5E3=as.data.frame(read_excel(here("data/Elicitation sheets/Martin Round 2.xlsx"), "Sali Nest Attempts")[,2:5]),
              P6E3=as.data.frame(read_excel(here("data/Elicitation sheets/Martin Round 2.xlsx"), "Sali Fledgings per Nest")[,2:5]))
 
-#CDEDBDiis/Will
+#CDEDBDiis
 E4list<-list(idE4=as.data.frame(read_excel(here("data/Elicitation sheets/Will Round 1.xlsx"), "Instructions")[15,-1])[1,],
              P1E4=as.data.frame(read_excel(here("data/Elicitation sheets/Will Round 2.xlsx"), "Sali Adult Survival")[,2:5]),
              P2E4=as.data.frame(read_excel(here("data/Elicitation sheets/Will Round 2.xlsx"), "Sali Juvenile Survival")[,2:5]),
@@ -43,7 +43,7 @@ E4list<-list(idE4=as.data.frame(read_excel(here("data/Elicitation sheets/Will Ro
              P5E4=as.data.frame(read_excel(here("data/Elicitation sheets/Will Round 2.xlsx"), "Sali Nest Attempts")[,2:5]),
              P6E4=as.data.frame(read_excel(here("data/Elicitation sheets/Will Round 2.xlsx"), "Sali Fledgings per Nest")[,2:5]))
 
-#96929/Haldre 
+#96929
 E5list<-list(idE5=as.data.frame(read_excel(here("data/Elicitation sheets/Haldre Round 1.xlsx"), "Instructions")[15,-1])[1,],
              P1E5=as.data.frame(read_excel(here("data/Elicitation sheets/Haldre Round 2.xlsx"), "Sali Adult Survival")[,2:5]),
              P2E5=as.data.frame(read_excel(here("data/Elicitation sheets/Haldre Round 2.xlsx"), "Sali Juvenile Survival")[,2:5]),
