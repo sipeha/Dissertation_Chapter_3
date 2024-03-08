@@ -130,22 +130,23 @@ Sali_sim_byaltFN<-function(nyears, nmales, nfemales, nsims,
 }
 
 nmales<-nfemales<-c(5,10,15,20)
+#loop over sims from 1 to 4
 simnum<-seq(31,40,by=1)
 for(j in simnum[1]:simnum[10]){
   for(i in 1:length(nmales)){
     XH<-Sali_sim_byaltFN(nyears = 20, nmales=nmales[i], nfemales=nfemales[i],nsims=10000,
-                         site="HMU",num_ex=5, K=285, includeK=F, samps=50)
+                         site="HMU",num_ex=5, K=327, includeK=F, samps=50)
     saveRDS(XH, here("SimFiles",paste0("Sali_HMU_noK_24 ",j,"_",nmales[i],".RDS")))
     XHK<-Sali_sim_byaltFN(nyears = 20, nmales=nmales[i], nfemales=nfemales[i],nsims=10000,
-                          site="HMU",num_ex=5, K=285, includeK=T, samps=50)
+                          site="HMU",num_ex=5, K=327, includeK=T, samps=50)
     saveRDS(XHK, here("SimFiles",paste0("Sali_HMU_K_24 ",j,"_",nmales[i],".RDS")))
     
     XR<-Sali_sim_byaltFN(nyears = 20, nmales=nmales[i], nfemales=nfemales[i],nsims=10000,
-                         site="Refuge",num_ex=5, K=811, includeK=F,samps=50)
+                         site="Refuge",num_ex=5, K=927, includeK=F,samps=50)
     saveRDS(XR, here("SimFiles",paste0("Sali_Refuge_noK_24 ",j,"_",nmales[i],".RDS")))
     
     XRK<-Sali_sim_byaltFN(nyears = 20, nmales=nmales[i], nfemales=nfemales[i],nsims=10000,
-                          site="Refuge",num_ex=5, K=811, includeK=T,samps=50)
+                          site="Refuge",num_ex=5, K=927, includeK=T,samps=50)
     saveRDS(XRK, here("SimFiles",paste0("Sali_Refuge_K_24 ",j,"_",nmales[i],".RDS")))
     
     print(j)
