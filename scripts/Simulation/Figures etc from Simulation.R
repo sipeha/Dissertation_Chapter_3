@@ -1,8 +1,3 @@
-#TODO: 
-# Need to clean this up
-#Figure for p9, Kokobothsites and Salibothsites
-#Appendix figures of the projected number of individuals at 21 years
-#TODO: make a table of the cumulative probability at 21 years
 
 #Summary output from sims
 library(here);library(ggplot2);library(dplyr)
@@ -39,6 +34,10 @@ plot(c(sensitivityKoko_HMU), ylab="difference between K and noK",
 points(c(sensitivityKoko_Refuge))
 points(c(sensitivitySali_HMU), col="red")
 points(c(sensitivitySali_Refuge), col="red")
+
+#find the maximum difference between with and without across all simulations
+max(sensitivityKoko_HMU, sensitivityKoko_Refuge, sensitivitySali_HMU, sensitivitySali_Refuge)
+#0.037
 
 #############
 #compare extinction probability with and without K
@@ -161,7 +160,7 @@ ggsave(p4, filename = "results/Simulation output/Koko_Refuge_ex_kandnok.png",  b
 
 
 ######################
-#plots for paper
+#plots for paper/report
 #plot Sali extinction prob with K at HMU and refuge
 ####################
 
@@ -301,55 +300,6 @@ p9
 #TODO: remove title - will be one of the figures
 ggsave(p9, filename = "results/Simulation output/Figure 2.png",  bg = "white",
        width = 8, height = 6, dpi = 300, units = "in", device='png')
-#######################
-#make a table for the output with 
-#csv for extinction probability table
-######################
-#TODO: need to change this to probability of persistence
-
-
-exprobSali<-data.frame(
-  fiveHMU=c(Both_extinction_HMU %>% select(value) %>% 
-              filter(Both_extinction_HMU$NumRel==5, Both_extinction_HMU$species=="Sali", Both_extinction_HMU$year=="21")),
-  tenHMU=c(Both_extinction_HMU %>% select(value) %>% 
-             filter(Both_extinction_HMU$NumRel==10, Both_extinction_HMU$species=="Sali", Both_extinction_HMU$year=="21")),
-  fifteenHMU=c(Both_extinction_HMU %>% select(value) %>% 
-                 filter(Both_extinction_HMU$NumRel==15, Both_extinction_HMU$species=="Sali", Both_extinction_HMU$year=="21")),
-  twentyHMU=c(Both_extinction_HMU %>% select(value) %>% 
-                filter(Both_extinction_HMU$NumRel==20, Both_extinction_HMU$species=="Sali", Both_extinction_HMU$year=="21")),
-  fiveRef=c(Both_extinction_Refuge %>% select(value) %>% 
-              filter(Both_extinction_Refuge$NumRel==5, Both_extinction_Refuge$species=="Sali", Both_extinction_Refuge$year=="21")),
-  tenRef=c(Both_extinction_Refuge %>% select(value) %>% 
-             filter(Both_extinction_Refuge$NumRel==10, Both_extinction_Refuge$species=="Sali", Both_extinction_Refuge$year=="21")),
-  fifteenRef=c(Both_extinction_Refuge %>% select(value) %>% 
-                 filter(Both_extinction_Refuge$NumRel==15, Both_extinction_Refuge$species=="Sali", Both_extinction_Refuge$year=="21")),
-  twentyRef=c(Both_extinction_Refuge %>% select(value) %>% 
-                filter(Both_extinction_Refuge$NumRel==20, Both_extinction_Refuge$species=="Sali", Both_extinction_Refuge$year=="21"))
-)
-
-colnames(exprobSali)<-c("5HMU", "10Hmu", "15HMU","20HMU","5Ref","10Ref","15Ref","20Ref")
-
-exprobKoko<-data.frame(
-  fiveHMU=c(Both_extinction_HMU %>% select(value) %>% 
-              filter(Both_extinction_HMU$NumRel==5, Both_extinction_HMU$species=="Koko", Both_extinction_HMU$year=="21")),
-  tenHMU=c(Both_extinction_HMU %>% select(value) %>% 
-             filter(Both_extinction_HMU$NumRel==10, Both_extinction_HMU$species=="Koko", Both_extinction_HMU$year=="21")),
-  fifteenHMU=c(Both_extinction_HMU %>% select(value) %>% 
-                 filter(Both_extinction_HMU$NumRel==15, Both_extinction_HMU$species=="Koko", Both_extinction_HMU$year=="21")),
-  twentyHMU=c(Both_extinction_HMU %>% select(value) %>% 
-                filter(Both_extinction_HMU$NumRel==20, Both_extinction_HMU$species=="Koko", Both_extinction_HMU$year=="21")),
-  fiveRef=c(Both_extinction_Refuge %>% select(value) %>% 
-              filter(Both_extinction_Refuge$NumRel==5, Both_extinction_Refuge$species=="Koko", Both_extinction_Refuge$year=="21")),
-  tenRef=c(Both_extinction_Refuge %>% select(value) %>% 
-             filter(Both_extinction_Refuge$NumRel==10, Both_extinction_Refuge$species=="Koko", Both_extinction_Refuge$year=="21")),
-  fifteenRef=c(Both_extinction_Refuge %>% select(value) %>% 
-                 filter(Both_extinction_Refuge$NumRel==15, Both_extinction_Refuge$species=="Koko", Both_extinction_Refuge$year=="21")),
-  twentyRef=c(Both_extinction_Refuge %>% select(value) %>% 
-                filter(Both_extinction_Refuge$NumRel==20, Both_extinction_Refuge$species=="Koko", Both_extinction_Refuge$year=="21"))
-)
-colnames(exprobKoko)<-c("5HMU", "10Hmu", "15HMU","20HMU","5Ref","10Ref","15Ref","20Ref")
-write.csv(exprobSali, here("results/Simulation output/SaliExprob.csv"))
-write.csv(exprobKoko, here("results/Simulation output/KokoExprob.csv"))
 
 #############################
 #Species at sites by scenario
@@ -566,83 +516,6 @@ ggsave(ps4, filename = "results/Simulation output/Koko_Refuge_proj.png",  bg = "
 
 
 
-
-
-#make a table for the output with 
-#csv for HMU means and CIs
-# proj_num_Sali<-data.frame(
-#   fiveHMU=c(
-#     paste0(formatC(SaliMeansHMU[21,,1,1], digits=1, format="f"),
-#            " (", formatC(SaliMeansHMU[21,,1,3], digits=1, format="f"),", ",
-#            formatC(SaliMeansHMU[21,,1,4], digits=1, format="f"),")")),
-#   tenHMU=c(
-#     paste0(formatC(SaliMeansHMU[21,,2,1], digits=1, format="f"),
-#            " (", formatC(SaliMeansHMU[21,,2,3], digits=1, format="f"),", ",
-#            formatC(SaliMeansHMU[21,,2,4], digits=1, format="f"),")")),
-#   fifteenHMU=c(
-#     paste0(formatC(SaliMeansHMU[21,,3,1], digits=1, format="f"),
-#            " (", formatC(SaliMeansHMU[21,,3,3], digits=1, format="f"),", ",
-#            formatC(SaliMeansHMU[21,,3,4], digits=1, format="f"),")")),
-#   twentyHMU=c(
-#     paste0(formatC(SaliMeansHMU[21,,4,1], digits=1, format="f"),
-#            " (", formatC(SaliMeansHMU[21,,4,3], digits=1, format="f"),", ",
-#            formatC(SaliMeansHMU[21,,4,4], digits=1, format="f"),")")),
-#   fiveRef=c(
-#     paste0(formatC(SaliMeansRefuge[21,,1,1], digits=1, format="f"),
-#            " (", formatC(SaliMeansRefuge[21,,1,3], digits=1, format="f"),", ",
-#            formatC(SaliMeansRefuge[21,,1,4], digits=1, format="f"),")")),
-#   tenRef=c(
-#     paste0(formatC(SaliMeansRefuge[21,,2,1], digits=1, format="f"),
-#            " (", formatC(SaliMeansRefuge[21,,2,3], digits=1, format="f"),", ",
-#            formatC(SaliMeansRefuge[21,,2,4], digits=1, format="f"),")")),
-#   fifteenRef=c(
-#     paste0(formatC(SaliMeansRefuge[21,,3,1], digits=1, format="f"),
-#            " (", formatC(SaliMeansRefuge[21,,3,3], digits=1, format="f"),", ",
-#            formatC(SaliMeansRefuge[21,,3,4], digits=1, format="f"),")")),
-#   twentyRef=c(
-#     paste0(formatC(SaliMeansRefuge[21,,4,1], digits=1, format="f"),
-#            " (", formatC(SaliMeansRefuge[21,,4,3], digits=1, format="f"),", ",
-#            formatC(SaliMeansRefuge[21,,4,4], digits=1, format="f"),")")))
-#   
-# proj_num_Koko<-data.frame(
-#   fiveHMU=c(
-#     paste0(formatC(KokoMeansHMU[21,,1,1], digits=1, format="f"),
-#            " (", formatC(KokoMeansHMU[21,,1,3], digits=1, format="f"),", ",
-#            formatC(KokoMeansHMU[21,,1,4], digits=1, format="f"),")")),
-#   tenHMU=c(
-#     paste0(formatC(KokoMeansHMU[21,,2,1], digits=1, format="f"),
-#            " (", formatC(KokoMeansHMU[21,,2,3], digits=1, format="f"),", ",
-#            formatC(KokoMeansHMU[21,,2,4], digits=1, format="f"),")")),
-#   fifteenHMU=c(
-#     paste0(formatC(KokoMeansHMU[21,,3,1], digits=1, format="f"),
-#            " (", formatC(KokoMeansHMU[21,,3,3], digits=1, format="f"),", ",
-#            formatC(KokoMeansHMU[21,,3,4], digits=1, format="f"),")")),
-#   twentyHMU=c(
-#     paste0(formatC(KokoMeansHMU[21,,4,1], digits=1, format="f"),
-#            " (", formatC(KokoMeansHMU[21,,4,3], digits=1, format="f"),", ",
-#            formatC(KokoMeansHMU[21,,4,4], digits=1, format="f"),")")),
-#   fiveRef=c(
-#     paste0(formatC(KokoMeansRefuge[21,,1,1], digits=1, format="f"),
-#            " (", formatC(KokoMeansRefuge[21,,1,3], digits=1, format="f"),", ",
-#            formatC(KokoMeansRefuge[21,,1,4], digits=1, format="f"),")")),
-#   tenRef=c(
-#     paste0(formatC(KokoMeansRefuge[21,,2,1], digits=1, format="f"),
-#            " (", formatC(KokoMeansRefuge[21,,2,3], digits=1, format="f"),", ",
-#            formatC(KokoMeansRefuge[21,,2,4], digits=1, format="f"),")")),
-#   fifteenRef=c(
-#     paste0(formatC(KokoMeansRefuge[21,,3,1], digits=1, format="f"),
-#            " (", formatC(KokoMeansRefuge[21,,3,3], digits=1, format="f"),", ",
-#            formatC(KokoMeansRefuge[21,,3,4], digits=1, format="f"),")")),
-#   twentyRef=c(
-#     paste0(formatC(KokoMeansRefuge[21,,4,1], digits=1, format="f"),
-#            " (", formatC(KokoMeansRefuge[21,,4,3], digits=1, format="f"),", ",
-#            formatC(KokoMeansRefuge[21,,4,4], digits=1, format="f"),")")))
-# 
-# write.csv(proj_num_Sali, here("results/Simulation output/Sali_proj_num.csv"))
-# write.csv(proj_num_Koko, here("results/Simulation output/Koko_proj_num.csv"))
-
-
-
 ##############
 #probability of  persistence with 95%
 ##############
@@ -849,8 +722,7 @@ ggsave(EX_Koko_ref, filename = "results/Simulation output/Persistence_Koko_Refug
        width = 8, height = 8, dpi = 300, units = "in", device='png')
 
 
-#TODO: will be a figure for both Sali and Koko at both sites
-#both sites Sali
+
 SaliBothSites<-rbind(Saliext_HMU_DF, Saliext_Refuge_DF)
 SaliBothSites$site<-c(rep("HMU", length(Saliext_HMU_DF[,1])), 
                       rep("Refuge", length(Saliext_Refuge_DF[,1])))

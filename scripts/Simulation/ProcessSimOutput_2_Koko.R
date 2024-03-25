@@ -156,7 +156,7 @@ combineNumsRelFNKoko<-function(site, K){
 }
 
 AllKoko_HMU_K_outs<-combineNumsRelFNKoko(site="HMU", K=T)
-saveRDS(AllKoko_HMU_K_outs, file="AllKoko_HMU_K_outs_2_2.RDS")
+saveRDS(AllKoko_HMU_K_outs, file="AllKoko_HMU_K_outs_2.RDS")
 
 
 AllKoko_HMU_noK_outs<-combineNumsRelFNKoko(site="HMU", K=F)

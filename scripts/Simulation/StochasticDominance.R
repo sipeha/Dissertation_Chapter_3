@@ -1,11 +1,4 @@
-#TODO: clean this up
-#figures: both SD at both sites
-#TODO: make one that looks at the number released and compares the sites
 
-#simple example of CDF from extinction probabilities
-
-#here are some extinction probabilties 
-#ext<-sort(runif(21,0,0.5))
 library(here);library(ggplot2)
 AllSali_HMU_K_outs<-readRDS("results/Simulation output/Simulations/AllSali_HMU_K_outs_2.RDS")
 AllSali_Refuge_K_outs<-readRDS("results/Simulation output/Simulations/AllSali_Refuge_K_outs_2.RDS")
@@ -25,15 +18,6 @@ CDF_ext<-function(extprobs,x){
   return(temps/length(extprobs))
 }
 
-# trial<-rbeta(10000, 0.4,0.2)
-# hist(trial)
-# cdftrial<-numeric(length(seqx))
-# for(i in 1:length(seqx)){
-#   cdftrial[i]<-CDF_ext(trial, seqx[i])  
-# }
-# 
-# hist(trial)
-# plot(seqx, cdftrial)
 
 seqx<-seq(-0.000000001,1,length.out=50)
 xx<-matrix(nrow=length(seqx), ncol=7)
@@ -240,8 +224,7 @@ RefbothSD
 ggsave(RefbothSD, filename = "results/Simulation output/BothSpeciesSD_Refuge.png",  bg = "white",
        width = 6, height = 8, dpi = 300, units = "in", device='png')
 
-#both species at both sites
-#TODO: this will be a figure
+
 
 SD_BothBoth<-rbind(SDboth_HMU, SDboth_Ref)
 SD_BothBoth$site<-c(rep("HMU", length(SDboth_HMU[,1])),

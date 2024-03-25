@@ -1,4 +1,4 @@
-#Sali simulation code
+#Ko'ko' simulation code
 library(here); library(dplyr); library(nimble)
 
 #read in ee values
@@ -33,13 +33,12 @@ simKoko_FN<-function(nyears, nmales, nfemales, nsims, alternative, site, num_ex,
   hatchlingspnest<-replicate(nsims, rgammamix(alpha=hatchlingspnest_temp$alphas, 
                                               beta=hatchlingspnest_temp$betas, num_ex=5))
   fec<-(nestsuccess*nestattempts*hatchlingspnest)/2
-  fecmat<-array(dim=c((nyears+1),nsims, samps ))#matrix(nrow=nsims, ncol=samps)
+  fecmat<-array(dim=c((nyears+1),nsims, samps ))
   for(i in 1:nsims){
     fecmat[,i,]<-rep(fec[i],samps)
   }
   
   #run simulations
-  #sims<-NULL
   sims<-array(dim=c(nsims, (nyears+1),samps))
   extinct<-array(dim=c(nsims, (nyears+1),samps))
   for(s in 1:nsims){
@@ -55,26 +54,17 @@ simKoko_FN<-function(nyears, nmales, nfemales, nsims, alternative, site, num_ex,
     if(includeK==T){
       for(t in 1:(nyears)){
         fecmat[t,s,]<-ifelse((Find[1,t,]+Mind[1,t,])>=K, 0, fecmat[t,s,])
-        #for(i in 1:samps){
-        #ifelse((Find[]))
-        #if((Find[1,t,i]+Mind[1,t,i])>=K){
+
         Find[2,t,]<-rbinom(samps,rpois(samps,(Find[1,t,]*fecmat[t,s,])), phij[s])
         Mind[2,t,]<-rbinom(samps, rpois(samps,(Mind[1,t,]*fecmat[t,s,])), phij[s])
         
         Find[1,t+1,]<-rbinom(samps, Find[1,t,],phiad[s])+rbinom(samps,Find[2,t,],phiad[s])
         Mind[1,t+1,]<-rbinom(samps, Mind[1,t,], phiad[s])+rbinom(samps, Mind[2,t,], phiad[s])
-        # }else{
-        #   Find[2,t,]<-rbinom(1,rpois(1,Find[1,t,]*fec[s,]), phij[s])
-        #   Mind[2,t,]<-rbinom(1, rpois(1,Mind[1,t,]*fec[s,]), phij[s])
-        # 
-        #   Find[1,t+1,]<-rbinom(1, Find[1,t,],phiad[s])+rbinom(1,Find[2,t,],phiad[s])
-        #   Mind[1,t+1,]<-rbinom(1, Mind[1,t,], phiad[s])+rbinom(1, Mind[2,t,], phiad[s])
+
       }
     }else if (includeK==F){
       for(t in 1:(nyears)){
         fecmat[t,s,]<-ifelse((Find[1,t,]+Mind[1,t,])>=9000, 0, fecmat[t,s,])
-        #for(i in 1:samps){
-        #if((Find[1,t,i]+Mind[1,t,i])>=3000){fec[s]=0}
         Find[2,t,]<-rbinom(samps,rpois(samps,Find[1,t,]*fecmat[t,s,]), phij[s])
         Mind[2,t,]<-rbinom(samps, rpois(samps,Mind[1,t,]*fecmat[t,s,]), phij[s])
         
@@ -83,23 +73,19 @@ simKoko_FN<-function(nyears, nmales, nfemales, nsims, alternative, site, num_ex,
         
       }
     }
-    #}
     #save adult totals and the instances that went extinct
     for(i in 1:samps){
       extinct[s,,i]<-ifelse((Find[1,,i]+Mind[1,,i])<1, 1, 0)
     }
     sims[s,,]<-Find[1,,]+Mind[1,,]
-    
-    #calculate population growth rate, include that too?
+  
     
   } #sim loop
   out<-list(sims=sims, extinct=extinct)
   return(out)
 }
 
-#to test it
-# simKoko_FN(nyears=10, nmales=10,nfemales=10,alternative="Scenario 1a",
-#            site="HMU", num_ex=5, includeK = F, K=312, nsims=100, samps=100)$sims
+
 
 #function to do multiple sims
 Koko_sim_byaltFN<-function(nyears, nmales, nfemales, nsims,
@@ -118,6 +104,7 @@ Koko_sim_byaltFN<-function(nyears, nmales, nfemales, nsims,
 }
 
 nmales<-nfemales<-c(5,10,15,20)
+#run from 1 to 40 in different instances (lazy parallel)
 simnum<-seq(31,40,by=1)
 for(j in simnum[1]:simnum[10]){
   for(i in 1:length(nmales)){

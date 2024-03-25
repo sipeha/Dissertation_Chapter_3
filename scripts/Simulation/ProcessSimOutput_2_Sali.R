@@ -156,7 +156,7 @@ combineNumsRelFNSali<-function(site, K){
 }
 
 AllSali_HMU_K_outs<-combineNumsRelFNSali(site="HMU", K=T)
-saveRDS(AllSali_HMU_K_outs, file="AllSali_HMU_K_outs_2_2.RDS")
+saveRDS(AllSali_HMU_K_outs, file="AllSali_HMU_K_outs_2.RDS")
 rm(AllSali_HMU_K_outs)
 
 AllSali_HMU_noK_outs<-combineNumsRelFNSali(site="HMU", K=F)
